@@ -2,7 +2,7 @@
 
 
 <!-- Banner Image -->
-![Russian Stemming ](https://pp.userapi.com/c621701/v621701500/69806/wpqSWKckB7A.jpg)
+![Russian Stemming ](https://github.com/Degranon/Stemming-ru/blob/master/%D0%91%D0%90%D0%9D%D0%9D%D0%95%D0%A0%20%D0%94%D0%9B%D0%AF%20%D0%A1%D0%A2%D0%95%D0%9C%D0%9C%D0%95%D0%A0%D0%90%D1%80%D1%83%D1%81.png)
 
 ## Введение. Цель проекта ##
 
