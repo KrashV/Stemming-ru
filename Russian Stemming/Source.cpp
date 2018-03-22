@@ -8,8 +8,6 @@
 
 void main(int argc, char *argv[])
 {
-	setlocale(LC_ALL, "Russian");
-
 	if (argc != 3)
 	{
 		std::cout << HELP_USAGE;
@@ -19,4 +17,6 @@ void main(int argc, char *argv[])
 	FileAnalyser fa(argv[1]);
 	textmap textmap = fa.stemm();
 	fa.save(argv[1], argv[2], textmap);
+
+	std::cout << "Finished sucessfully" << std::endl;
 }

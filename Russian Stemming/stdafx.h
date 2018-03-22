@@ -10,4 +10,5 @@ typedef struct {
 	std::string str;
 	int n;
 } stringNo;
+
 typedef std::map<std::string, std::vector<stringNo>> textmap;
