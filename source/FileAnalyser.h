@@ -13,7 +13,6 @@ public:
 
 
 	size_t getSize();
-	size_t getWordNo();
 
 	textmap stemm();
 	void save(const std::string, const std::string, const textmap);

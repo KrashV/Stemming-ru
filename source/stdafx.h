@@ -7,8 +7,8 @@
 #include <map>
 
 typedef struct {
-	std::string str;
+	std::wstring wstr;
 	int n;
-} stringNo;
+} wstringNo;
 
-typedef std::map<std::string, std::vector<stringNo>> textmap;
+typedef std::map<std::wstring, std::vector<wstringNo>> textmap;

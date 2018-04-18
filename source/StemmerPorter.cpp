@@ -1,49 +1,48 @@
 #include "StemmerPorter.h"
-#include <cctype>
 #include <algorithm>
 #include <iterator>
 #include <functional>
+#include <clocale>
 
-const string StemmerPorter::const1 = "¿≈»Œ”€›»ﬁﬂ";
-const string StemmerPorter::EMPTY = "";
-const string StemmerPorter::S1 = "$1";
-const string StemmerPorter::S13 = "$1$3";
-const string StemmerPorter::SN = "Õ";
+const wstring StemmerPorter::const1 = L"¿≈»Œ”€›»ﬁﬂ";
+const wstring StemmerPorter::EMPTY = L"";
+const wstring StemmerPorter::S1 = L"$1";
+const wstring StemmerPorter::S13 = L"$1$3";
+const wstring StemmerPorter::SN = L"Õ";
 
-const regex StemmerPorter::PERFECTIVEGROUND = regex("(»¬|»¬ÿ»|»¬ÿ»—‹|€¬|€¬ÿ»|€¬ÿ»—‹|¬ÿ»|¬ÿ»—‹)$");
-const regex StemmerPorter::REFLEXIVE = regex("(—ﬂ|—‹)$");
-const regex StemmerPorter::ADJECTIVE = regex("(≈≈|»≈|€≈|Œ≈|»Ã»|€Ã»|≈…|»…|€…|Œ…|≈Ã|»Ã|€Ã|ŒÃ|≈√Œ|Œ√Œ|≈Ã”|ŒÃ”|»’|€’|”ﬁ|ﬁﬁ|¿ﬂ|ﬂﬂ|Œﬁ|≈ﬁ)$");
-const regex StemmerPorter::PARTICIPLE = regex("(.*)(»¬ÿ|€¬ÿ|”ﬁŸ)$|([¿ﬂ])(≈Ã|ÕÕ|¬ÿ|ﬁŸ|Ÿ)$");
-const regex StemmerPorter::VERB = regex("(.*)(»À¿|€À¿|≈Õ¿|≈…“≈|”…“≈|»“≈|»À»|€À»|≈…|”…|»À|€À|»Ã|€Ã|≈Õ|»ÀŒ|€ÀŒ|≈ÕŒ|ﬂ“|”≈“|”ﬁ“|»“|€“|≈Õ€|»“‹|€“‹|»ÿ‹|”ﬁ|ﬁ)$|([¿ﬂ])(À¿|Õ¿|≈“≈|…“≈|À»|…|À|≈Ã|Õ|ÀŒ|ÕŒ|≈“|ﬁ“|Õ€|“‹|≈ÿ‹|ÕÕŒ)$");
-const regex StemmerPorter::NOUN = regex("(¿|≈¬|Œ¬|»≈|‹≈|≈|»ﬂÃ»|ﬂÃ»|¿Ã»|≈»|»»|»|»≈…|≈…|Œ…|»…|…|»ﬂÃ|ﬂÃ|»≈Ã|≈Ã|¿Ã|ŒÃ|Œ|”|¿’|»ﬂ’|ﬂ’|€|‹|»ﬁ|‹ﬁ|ﬁ|»ﬂ|‹ﬂ|ﬂ)$");
-const regex StemmerPorter::I = regex("»$");
-const regex StemmerPorter::P = regex("‹$");
-const regex StemmerPorter::NN = regex("ÕÕ$");
-const regex StemmerPorter::DERIVATIONAL = regex(".*[^¿≈»Œ”€›ﬁﬂ]+[¿≈»Œ”€›ﬁﬂ].*Œ—“‹?$");
-const regex StemmerPorter::DER = regex("Œ—“‹?$");
-const regex StemmerPorter::SUPERLATIVE = regex("(≈…ÿ≈|≈…ÿ)$");
+const wregex StemmerPorter::PERFECTIVEGROUND = wregex(L"(»¬|»¬ÿ»|»¬ÿ»—‹|€¬|€¬ÿ»|€¬ÿ»—‹|¬ÿ»|¬ÿ»—‹)$");
+const wregex StemmerPorter::REFLEXIVE = wregex(L"(—ﬂ|—‹)$");
+const wregex StemmerPorter::ADJECTIVE = wregex(L"(≈≈|»≈|€≈|Œ≈|»Ã»|€Ã»|≈…|»…|€…|Œ…|≈Ã|»Ã|€Ã|ŒÃ|≈√Œ|Œ√Œ|≈Ã”|ŒÃ”|»’|€’|”ﬁ|ﬁﬁ|¿ﬂ|ﬂﬂ|Œﬁ|≈ﬁ)$");
+const wregex StemmerPorter::PARTICIPLE = wregex(L"(.*)(»¬ÿ|€¬ÿ|”ﬁŸ)$|([¿ﬂ])(≈Ã|ÕÕ|¬ÿ|ﬁŸ|Ÿ)$");
+const wregex StemmerPorter::VERB = wregex(L"(.*)(»À¿|€À¿|≈Õ¿|≈…“≈|”…“≈|»“≈|»À»|€À»|≈…|”…|»À|€À|»Ã|€Ã|≈Õ|»ÀŒ|€ÀŒ|≈ÕŒ|ﬂ“|”≈“|”ﬁ“|»“|€“|≈Õ€|»“‹|€“‹|»ÿ‹|”ﬁ|ﬁ)$|([¿ﬂ])(À¿|Õ¿|≈“≈|…“≈|À»|…|À|≈Ã|Õ|ÀŒ|ÕŒ|≈“|ﬁ“|Õ€|“‹|≈ÿ‹|ÕÕŒ)$");
+const wregex StemmerPorter::NOUN = wregex(L"(¿|≈¬|Œ¬|»≈|‹≈|≈|»ﬂÃ»|ﬂÃ»|¿Ã»|≈»|»»|»|»≈…|≈…|Œ…|»…|…|»ﬂÃ|ﬂÃ|»≈Ã|≈Ã|¿Ã|ŒÃ|Œ|”|¿’|»ﬂ’|ﬂ’|€|‹|»ﬁ|‹ﬁ|ﬁ|»ﬂ|‹ﬂ|ﬂ)$");
+const wregex StemmerPorter::I = wregex(L"»$");
+const wregex StemmerPorter::P = wregex(L"‹$");
+const wregex StemmerPorter::NN = wregex(L"ÕÕ$");
+const wregex StemmerPorter::DERIVATIONAL = wregex(L".*[^¿≈»Œ”€›ﬁﬂ]+[¿≈»Œ”€›ﬁﬂ].*Œ—“‹?$");
+const wregex StemmerPorter::DER = wregex(L"Œ—“‹?$");
+const wregex StemmerPorter::SUPERLATIVE = wregex(L"(≈…ÿ≈|≈…ÿ)$");
 
-const regex StemmerPorter::PUNCTUATION = regex("[^\\w\\s]$");
+const wregex StemmerPorter::PUNCTUATION = wregex(L"[^\\w\\s]$");
 
 StemmerPorter::StemmerPorter() {
-	setlocale(0, "");
+
 }
 
-string StemmerPorter::get(string s) {
-
-	transform(s.begin(), s.end(), s.begin(), ::toupper);
+wstring StemmerPorter::get(wstring s) {
+	transform(s.begin(), s.end(), s.begin(), towupper);
 	replace(s.begin(), s.end(), '®', '≈');
 
 	size_t pos = s.find_first_of(const1, 0);
 
-	if (pos != string::npos) {
+	if (pos != wstring::npos) {
 
 		// Step 1: Search for a PERFECTIVE GERUND ending.
 		// If one is found remove it, and that is then the end of step 1.
 
-		string pre = s.substr(0, pos + 1);
-		string rv = s.substr(pos + 1);
-		string temp = regex_replace(rv, PERFECTIVEGROUND, EMPTY);
+		wstring pre = s.substr(0, pos + 1);
+		wstring rv = s.substr(pos + 1);
+		wstring temp = regex_replace(rv, PERFECTIVEGROUND, EMPTY);
 
 		if (rv.size() != temp.size()) {
 			rv = temp;
@@ -97,6 +96,6 @@ string StemmerPorter::get(string s) {
 		s = pre + rv;
 	}
 
-	transform(s.begin(), s.end(), s.begin(), tolower);
+	transform(s.begin(), s.end(), s.begin(), towlower);
 	return s;
 }

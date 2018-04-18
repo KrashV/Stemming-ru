@@ -24,6 +24,9 @@
     <ClCompile Include="FileAnalyser.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="utf8Converter.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StemmerPorter.h">
@@ -33,6 +36,9 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="utf8Converter.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>

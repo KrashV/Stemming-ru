@@ -1,12 +1,12 @@
 #include "FileAnalyser.h"
 #include "StemmerPorter.h"
+#include "utf8Converter.h"
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
 
 FileAnalyser::FileAnalyser(const std::string fileName)
 {
-	setlocale(0, "");
 	filestream.open(fileName, ios::binary);
 
 	if (!filestream.is_open()) {
@@ -18,36 +18,28 @@ size_t FileAnalyser::getSize() {
 	return (size_t)filestream.tellg();
 }
 
-size_t FileAnalyser::getWordNo() {
-
-	size_t size;
-	std::istream_iterator<std::string> in { filestream }, end;
-	size = std::distance(in, end);
-
-	filestream.clear();
-	filestream.seekg(0);
-	return size;
-}
-
 textmap FileAnalyser::stemm() {
 	StemmerPorter sp;
 	string word;
+	wstring w_word;
 	textmap textmap;
+	utf8Converter converter;
 
 	while (filestream >> word)
 	{
+		w_word = converter.utf8_decode(word);
 		// get rid of the punctuation marks
-		word.erase(std::remove_if(word.begin(), word.end(), [](const unsigned char c) { return ispunct((int)c); }), word.end());
+		w_word.erase(std::remove(w_word.begin(), w_word.end(), L'.'), w_word.end());
 
-		string stemmed = sp.get(word);
+		wstring stemmed = sp.get(w_word);
 
 		// if map doesn't contain the stemmed word
 		if (textmap.find(stemmed) == textmap.end()) {
-			vector<stringNo> v;
-			stringNo sn;
+			vector<wstringNo> v;
+			wstringNo sn;
 
 			// create new one
-			sn.str = word;
+			sn.wstr = w_word;
 			sn.n = 1;
 
 
@@ -61,13 +53,13 @@ textmap FileAnalyser::stemm() {
 		{
 			textmap::iterator it = textmap.find(stemmed);
 
-			vector<stringNo> v = it->second;
+			vector<wstringNo> v = it->second;
 			bool isNew = true;
 
 			// if the actual word is already on the list,
 			// increase the number of occurrences
 			for (auto & value : v) {
-				if (value.str == word) {
+				if (value.wstr == w_word) {
 					value.n++;
 					isNew = false;
 					break;
@@ -76,8 +68,8 @@ textmap FileAnalyser::stemm() {
 
 			// else create a new one
 			if (isNew) {
-				stringNo sn;
-				sn.str = word;
+				wstringNo sn;
+				sn.wstr = w_word;
 				sn.n = 1;
 
 				v.push_back(sn);
@@ -92,17 +84,18 @@ textmap FileAnalyser::stemm() {
 
 void FileAnalyser::save(const string inputFileName, const string outputFileName, const textmap textmap)
 {
-	ofstream file;
+	wofstream file;
 	file.open(outputFileName);
+	utf8Converter converter;
 
-	file << "The stem table for " << inputFileName << endl;
+	file << L"The stem table for " << converter.utf8_decode(inputFileName) << endl;
 
 	for (auto const& stem : textmap)
 	{
-		file << stem.first << ";";
+		file << stem.first << L";";
 
 		for (auto const& list : stem.second) {
-			file << list.str << ":" << list.n << ";";
+			file << list.wstr << L":" << list.n << L";";
 		}
 
 		file << endl;

@@ -7,28 +7,28 @@ using namespace std;
 
 class StemmerPorter {
 private:
-	static const string EMPTY;
-	static const string S1;
-	static const string S13;
-	static const string SN;
-	static const string const1;
-	static const regex PERFECTIVEGROUND;
-	static const regex REFLEXIVE;
-	static const regex ADJECTIVE;
-	static const regex PARTICIPLE;
-	static const regex VERB;
-	static const regex NOUN;
-	static const regex I;
-	static const regex P;
-	static const regex NN;
-	static const regex DERIVATIONAL;
-	static const regex DER;
-	static const regex SUPERLATIVE;
-	static const regex PUNCTUATION;
+	static const wstring EMPTY;
+	static const wstring S1;
+	static const wstring S13;
+	static const wstring SN;
+	static const wstring const1;
+	static const wregex PERFECTIVEGROUND;
+	static const wregex REFLEXIVE;
+	static const wregex ADJECTIVE;
+	static const wregex PARTICIPLE;
+	static const wregex VERB;
+	static const wregex NOUN;
+	static const wregex I;
+	static const wregex P;
+	static const wregex NN;
+	static const wregex DERIVATIONAL;
+	static const wregex DER;
+	static const wregex SUPERLATIVE;
+	static const wregex PUNCTUATION;
 
 public:
 	StemmerPorter();
-	string get(string s);
+	wstring get(wstring s);
 };
 
 #endif // STEMMER_PORTER_H

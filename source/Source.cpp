@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 	}
 
 	try {
+		std::locale::global(std::locale("Russian_Russia"));
 		FileAnalyser fa(argv[1]);
 		textmap textmap = fa.stemm();
 		fa.save(argv[1], argv[2], textmap);

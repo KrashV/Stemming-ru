@@ -147,11 +147,13 @@
     <ClCompile Include="FileAnalyser.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StemmerPorter.cpp" />
+    <ClCompile Include="utf8Converter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileAnalyser.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StemmerPorter.h" />
+    <ClInclude Include="utf8Converter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
