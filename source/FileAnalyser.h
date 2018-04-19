@@ -3,19 +3,10 @@
 
 class FileAnalyser
 {
-
-private:
-	std::ifstream filestream;
-
 public:
 
-	FileAnalyser(const std::string fileName);
-
-
-	size_t getSize();
-
-	textmap stemm();
-	void save(const std::string, const std::string, const textmap);
+	static textmap stemm(std::ifstream &);
+	static void save(const std::string &, const std::string &, const textmap);
 	~FileAnalyser();
 };
 

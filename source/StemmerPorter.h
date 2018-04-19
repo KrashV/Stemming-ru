@@ -28,7 +28,7 @@ private:
 
 public:
 	StemmerPorter();
-	wstring get(wstring s);
+	static wstring get(wstring s);
 };
 
 #endif // STEMMER_PORTER_H
