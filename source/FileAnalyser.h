@@ -5,7 +5,7 @@ class FileAnalyser
 {
 public:
 
-	static textmap stemm(std::ifstream &);
+	static textmap stemm(std::ifstream &); 
 	static void save(const std::string &, const std::string &, const textmap);
 	~FileAnalyser();
 };
