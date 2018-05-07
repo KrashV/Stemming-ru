@@ -10,7 +10,7 @@ branches:
 env:
   global:
     - GH_REPO_NAME: Stemming-ru
-    - DOXYFILE: $TRAVIS_BUILD_DIR/C:/Users/Degranon/Documents/GitHub/Stemming-ru/Doxyfile
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
     - GH_REPO_REF: github.com/KrashV/Stemming-ru.git
 
 # Install dependencies
@@ -22,10 +22,10 @@ addons:
       - doxygen-latex
       - doxygen-gui
       - graphviz
-
-# Build your code e.g. by calling make
-script:
-  - make
+      
+language: node_js
+node_js:
+- stable
 
 # Generate and deploy documentation
 after_success:
