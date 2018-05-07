@@ -1,3 +1,10 @@
+/**
+* \file
+* \brief Methods of stemming algorithm class
+*
+* This file contains the methods and functions of the stemming algorithm class for keyword search
+*/
+
 #include "StemmerPorter.h"
 #include <algorithm>
 #include <iterator>

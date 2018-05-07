@@ -1,11 +1,17 @@
-#include "FileAnalyser.h"
-#include "StemmerPorter.h"
-#include "utf8Converter.h"
+/**
+* \file
+* \brief Methods of class for file analysis
+*
+* This file contains the methods and functions of the class for analyze the input file
+*/
 #include <algorithm>
 #include <iterator>
 #include <cstdlib>
 #include <cctype>
 #include <string>
+#include "FileAnalyser.h"
+#include "StemmerPorter.h"
+#include "utf8Converter.h"
 
 textmap FileAnalyser::stemm(ifstream &filestream) {
 	StemmerPorter sp;

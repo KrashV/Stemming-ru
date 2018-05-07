@@ -1,3 +1,8 @@
+/**
+* \file
+* \brief Methods of class for string conversion (Unicode <-> UTF8)
+*/
+
 #include "utf8Converter.h"
 
 // Convert a wide Unicode string to an UTF8 string

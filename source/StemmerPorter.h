@@ -1,3 +1,9 @@
+/**
+* \file
+* \brief Header file with stemming algorithm class
+*
+* This file contains the definition of the stemming algorithm class for keyword search
+*/
 #ifndef STEMMER_PORTER_H
 #define STEMMER_PORTER_H
 
@@ -5,6 +11,9 @@
 
 using namespace std;
 
+/**
+* \brief Stemming class
+*/
 class StemmerPorter {
 private:
 	static const wstring EMPTY;
@@ -27,7 +36,18 @@ private:
 	static const wregex PUNCTUATION;
 
 public:
+	/**
+	* \brief Class constructor
+	*/
 	StemmerPorter();
+
+	/**
+	* \brief Get the stemm from word
+	*
+	* \param[in] s Word
+	*
+	* \return It's stemm
+	*/
 	static wstring get(wstring s);
 };
 

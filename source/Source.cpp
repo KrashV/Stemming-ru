@@ -1,11 +1,24 @@
+/**
+* \file
+* \brief Run file
+*/
+#include <cstdio>
+#include <windows.h>
 #include "StemmerPorter.h"
 #include "FileAnalyser.h"
 
-#include <cstdio>
-#include <windows.h>
-
 #define HELP_USAGE "Usage: <stemmer.exe> <path to source file> <destination .csv file>"
 
+/**
+* \brief Main function
+*
+* \param[in] argc Arguments count
+* \param[in] argv Arguments value
+*
+* \return
+* - 0 Success
+* - 1 Error
+*/
 int main(int argc, char *argv[])
 {
 	if (argc != 3)
@@ -18,7 +31,7 @@ int main(int argc, char *argv[])
 		static_cast<void>(std::locale::global(std::locale("Russian_Russia")));
 
 
-		ifstream file (argv[1]);
+		ifstream file(argv[1]);
 		FileAnalyser fileAnalyser;
 
 		if (!file.is_open()) {
