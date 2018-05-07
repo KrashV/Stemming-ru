@@ -1,15 +1,15 @@
 #!/bin/sh
 ################################################################################
-# Title         : generateDocumentation.sh
-# Date created  : 2017
-# Notes         : original script from Jeroen de Bruijn
-__AUTHOR__="KrashV"
+# Title         : generateDocumentationAndDeploy.sh
+# Date created  : 2016/02/22
+# Notes         :
+__AUTHOR__="Krasheninnikov Vladimir"
 # Preconditions:
-# - Packages doxygen doxygen-doc doxygen-gui graphviz
+# - Packages doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
 #   must be installed.
 # - Doxygen configuration file must have the destination directory empty and
 #   source code directory with a $(TRAVIS_BUILD_DIR) prefix.
-# - An gh-pages branch should already exist. See below for mor info on hoe to
+# - An gh-pages branch should already exist. See below for mor info on how to
 #   create a gh-pages branch.
 #
 # Required global variables:
@@ -39,18 +39,13 @@ echo 'Setting up the script...'
 # Exit with nonzero exit code if anything fails
 set -e
 
-GH_REPO_ORG=`echo $TRAVIS_REPO_SLUG | cut -d "/" -f 1`
-GH_REPO_NAME=`echo $TRAVIS_REPO_SLUG | cut -d "/" -f 2`
-GH_REPO_REF="github.com/$GH_REPO_ORG/$GH_REPO_NAME.git"
-DOXYFILE=$TRAVIS_BUILD_DIR/doc/Doxyfile
-
-
-# Get the current gh-pages branch
-git clone -b gh-pages git@github.com:$GH_REPO_ORG/$GH_REPO_NAME.git code_docs
+# Create a clean working directory for this script.
+mkdir code_docs
 cd code_docs
 
-# Copy DoxygenLayout.xml here
-cp $TRAVIS_BUILD_DIR/doc/DoxygenLayout.xml .
+# Get the current gh-pages branch
+git clone -b gh-pages https://git@$GH_REPO_REF
+cd $GH_REPO_NAME
 
 ##### Configure git.
 # Set the push default to simple i.e. push only the current branch.
@@ -59,8 +54,12 @@ git config --global push.default simple
 git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
-# go back to first commit
-git reset --hard `git rev-list --max-parents=0 --abbrev-commit HEAD`
+# Remove everything currently in the gh-pages branch.
+# GitHub is smart enough to know which files have changed and which files have
+# stayed the same and will only update the changed files. So the gh-pages branch
+# can be safely cleaned, and it is sure that everything pushed later is the new
+# documentation.
+rm -rf *
 
 # Need to create a .nojekyll file to allow filenames starting with an underscore
 # to be seen on the gh-pages site. Therefore creating an empty .nojekyll file.
@@ -80,6 +79,7 @@ doxygen $DOXYFILE 2>&1 | tee doxygen.log
 # Check this by verifying that the html directory and the file html/index.html
 # both exist. This is a good indication that Doxygen did it's work.
 if [ -d "html" ] && [ -f "html/index.html" ]; then
+
     echo 'Uploading documentation to the gh-pages branch...'
     # Add everything in this directory (the Doxygen code documentation) to the
     # gh-pages branch.
@@ -94,7 +94,7 @@ if [ -d "html" ] && [ -f "html/index.html" ]; then
     # Force push to the remote gh-pages branch.
     # The ouput is redirected to /dev/null to hide any sensitive credential data
     # that might otherwise be exposed.
-    git push --force "git@github.com:$GH_REPO_ORG/$GH_REPO_NAME.git" > /dev/null 2>&1
+    git push --force "https://${GH_REPO_TOKEN}@${GH_REPO_REF}" > /dev/null 2>&1
 else
     echo '' >&2
     echo 'Warning: No documentation (html) files have been found!' >&2
