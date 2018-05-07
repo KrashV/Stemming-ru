@@ -9,7 +9,7 @@ __AUTHOR__="Krasheninnikov Vladimir"
 #   must be installed.
 # - Doxygen configuration file must have the destination directory empty and
 #   source code directory with a $(TRAVIS_BUILD_DIR) prefix.
-# - An gh-pages branch should already exist. See below for mor info on how to
+# - An gh-pages branch should already exist. See below for mor info on hoe to
 #   create a gh-pages branch.
 #
 # Required global variables:

@@ -144,20 +144,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\docs\FileAnalyser.cpp" />
-    <ClCompile Include="..\docs\Source.cpp" />
-    <ClCompile Include="..\docs\StemmerPorter.cpp" />
-    <ClCompile Include="..\docs\utf8Converter.cpp" />
     <ClCompile Include="FileAnalyser.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StemmerPorter.cpp" />
     <ClCompile Include="utf8Converter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\docs\FileAnalyser.h" />
-    <ClInclude Include="..\docs\stdafx.h" />
-    <ClInclude Include="..\docs\StemmerPorter.h" />
-    <ClInclude Include="..\docs\utf8Converter.h" />
     <ClInclude Include="FileAnalyser.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StemmerPorter.h" />
