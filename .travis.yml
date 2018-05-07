@@ -22,10 +22,10 @@ addons:
       - doxygen-latex
       - doxygen-gui
       - graphviz
-
-# Build your code e.g. by calling make
-#script:
-#  - make code-docs
+      
+language: node_js
+node_js:
+- stable
 
 # Generate and deploy documentation
 after_success:
