@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RussianStemming", "RussianStemming.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test_RStemmer", "..\Test_RStemmer\Test_RStemmer.vcxproj", "{486A0620-F29C-4CBB-ADB8-88B51DB0063A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B12702AD-ABFB-343A-A199-8E24837244A3} = {B12702AD-ABFB-343A-A199-8E24837244A3}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
+		{486A0620-F29C-4CBB-ADB8-88B51DB0063A}.Debug|x86.ActiveCfg = Debug|Win32
+		{486A0620-F29C-4CBB-ADB8-88B51DB0063A}.Debug|x86.Build.0 = Debug|Win32
+		{486A0620-F29C-4CBB-ADB8-88B51DB0063A}.Release|x86.ActiveCfg = Release|Win32
+		{486A0620-F29C-4CBB-ADB8-88B51DB0063A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {000B5A02-EE76-4641-B4BE-D024C8C580A3}
+	EndGlobalSection
+EndGlobal
