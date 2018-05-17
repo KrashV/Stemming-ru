@@ -22,7 +22,7 @@ public:
 	*
 	* \return map of stemms
 	*/
-	static textmap stemm(std::ifstream &);
+	static textmap stemm(std::ifstream &filestream));
 
 	/**
 	* \brief Print the result of program in the output file
@@ -31,7 +31,7 @@ public:
 	* \param[in] outputFileName Output file name
 	* \param[in] textmap Map with words and their stemms
 	*/
-	static void save(const std::string &, const std::string &, const textmap);
+	static void save(const string &inputFileName, const string &outputFileName, const textmap textmap);
 
 	/**
 	* \brief Class destructor
