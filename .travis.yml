@@ -10,7 +10,7 @@ branches:
 env:
   global:
     - GH_REPO_NAME: Stemming-ru
-    - DOXYFILE: DoxyAutoDoc
+    - DOXYFILE: Doxyfile
     - GH_REPO_REF: github.com/KrashV/Stemming-ru.git
 
 # Install dependencies
