@@ -16,10 +16,8 @@ public:
 	explicit TestRStemmer(QObject *parent = 0);
 
 	private slots: // must be private
-	//void FileAnalyserWordCountTest();
-	//void FileAnalyserWordCountTest_data();
-	void StemmerPorterFunctionalityTest_data();
-	void StemmerPorterFunctionalityTest();
+	void StemmerPorterFunctionalityTest1_data();
+	void StemmerPorterFunctionalityTest1();
 
 };
 
