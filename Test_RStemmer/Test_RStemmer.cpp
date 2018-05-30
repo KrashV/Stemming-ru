@@ -39,7 +39,7 @@ void TestRStemmer::StemmerPorterFunctionalityTest1_data()
 	std::wstring str1;
 	std::wstring str2;
 	int i = 1;
-	char s[] = "word_00";//name for test
+	char testName[] = "word_00";//name for test
 
 	QFile file("../Test_data/words.txt");
 	if (file.open(QIODevice::ReadOnly))
@@ -53,14 +53,16 @@ void TestRStemmer::StemmerPorterFunctionalityTest1_data()
 			qstr2 = stream.readLine();
 			str2 = qstr2.toStdWString();
 
-			s[6] = i + '0';
-			QTest::newRow(s) << wstring(str1) << wstring(str2);
+			testName[6] = i + '0';
+			QTest::newRow(testName) << wstring(str1) << wstring(str2);
 
-			i++;
+			
 			if (i == 9) {
-				s[5]++;
+				testName[5]++;
 				i = 0;
+				continue;
 			}
+			i++;
 
 		}
 		if (stream.status() != QTextStream::Ok)
@@ -84,5 +86,3 @@ void TestRStemmer::StemmerPorterFunctionalityTest1()
 
 
 QTEST_MAIN(TestRStemmer)
-//#include "RStemmerTest.moc"
-//#include "moc_RStemmerTest.cpp"
