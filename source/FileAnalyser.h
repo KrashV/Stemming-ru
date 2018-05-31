@@ -8,6 +8,8 @@
 #define FILE_ANALYSER_H
 #pragma once
 
+#include "stdafx.h"
+
 /**
 * \brief Class for file analysis
 */
