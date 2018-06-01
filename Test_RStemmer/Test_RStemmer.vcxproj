@@ -17,6 +17,9 @@
   <ItemGroup>
     <QtMoc Include="Test_RStemmer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Test_data\words.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{486A0620-F29C-4CBB-ADB8-88B51DB0063A}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>

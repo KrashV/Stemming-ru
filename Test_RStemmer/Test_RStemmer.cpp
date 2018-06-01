@@ -7,7 +7,8 @@ TestRStemmer::TestRStemmer(QObject *parent) :
 {
 }
 
-/*void TestRStemmer::FileAnalyserWordCountTest_data()
+/*Deleted test
+void TestRStemmer::FileAnalyserWordCountTest_data()
 {
 	QTest::addColumn<wstring>("FileName");
 	QTest::addColumn<int>("WordCount");
@@ -41,7 +42,7 @@ void TestRStemmer::StemmerPorterFunctionalityTest1_data()
 	int i = 1;
 	char testName[] = "word_00";//name for test
 
-	QFile file("../Test_data/words.txt");
+	QFile file("../../Test_data/words.txt");
 	if (file.open(QIODevice::ReadOnly))
 	{
 		QTextStream stream(&file);
@@ -55,7 +56,6 @@ void TestRStemmer::StemmerPorterFunctionalityTest1_data()
 
 			testName[6] = i + '0';
 			QTest::newRow(testName) << wstring(str1) << wstring(str2);
-
 			
 			if (i == 9) {
 				testName[5]++;
@@ -81,7 +81,6 @@ void TestRStemmer::StemmerPorterFunctionalityTest1()
 	QFETCH(wstring, Stem);
 	StemmerPorter sp;
 	QCOMPARE(sp.get(Word), Stem);
-
 }
 
 

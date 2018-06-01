@@ -1,7 +1,6 @@
 #ifndef TEST_RSTEMMER_H
 #define TEST_RSTEMMER_H
 #include "StemmerPorter.h"
-//#include "FileAnalyser.h"
 #include <QObject>
 #include <sstream>
 
