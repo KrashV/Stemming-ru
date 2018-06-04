@@ -18,11 +18,10 @@ textmap FileAnalyser::stemm(ifstream &filestream) {
 	string word;
 	wstring w_word;
 	textmap textmap;
-	utf8Converter converter;
 
 	while (filestream >> word)
 	{
-		w_word = converter.utf8_decode(word);
+		w_word = utf8Converter::utf8_decode(word);
 
 		// get rid of the punctuation marks
 		w_word.erase(std::remove_if(w_word.begin(), w_word.end(),
@@ -85,10 +84,11 @@ textmap FileAnalyser::stemm(ifstream &filestream) {
 void FileAnalyser::save(const string &inputFileName, const string &outputFileName, const textmap textmap)
 {
 	wofstream file;
-	file.open(outputFileName);
-	utf8Converter converter;
+	setlocale(LC_ALL, "Russian");
 
-	file << L"The stem table for " << converter.utf8_decode(inputFileName) << endl;
+	file.open(outputFileName);
+
+	file << L"The stem table for " << utf8Converter::utf8_decode(inputFileName) << endl;
 
 	for (auto const& stem : textmap)
 	{
