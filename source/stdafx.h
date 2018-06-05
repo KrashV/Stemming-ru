@@ -1,4 +1,4 @@
-/**
+﻿/**
 * \file
 * \brief Header with structures, that used in algorithm
 */

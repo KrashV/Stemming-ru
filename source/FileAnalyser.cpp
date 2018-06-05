@@ -1,4 +1,4 @@
-/**
+﻿/**
 * \file
 * \brief Methods of class for file analysis
 *

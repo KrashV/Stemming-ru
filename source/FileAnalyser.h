@@ -1,4 +1,4 @@
-/**
+﻿/**
 * \file
 * \brief Header file with class for file analysis
 *

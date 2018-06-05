@@ -1,4 +1,4 @@
-/**
+﻿/**
 * \file
 * \brief Methods of class for string conversion (Unicode <-> UTF8)
 */

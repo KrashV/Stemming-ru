@@ -1,4 +1,4 @@
-/**
+Ôªø/**
 * \file
 * \brief Methods of stemming algorithm class
 *
@@ -11,24 +11,24 @@
 #include <functional>
 #include <clocale>
 
-const wstring StemmerPorter::const1 = L"¿≈»Œ”€›»ﬁﬂ";
+const wstring StemmerPorter::const1 = L"–ê–ï–ò–û–£–´–≠–ò–Æ–Ø";
 const wstring StemmerPorter::EMPTY = L"";
 const wstring StemmerPorter::S1 = L"$1";
 const wstring StemmerPorter::S13 = L"$1$3";
-const wstring StemmerPorter::SN = L"Õ";
+const wstring StemmerPorter::SN = L"–ù";
 
-const wregex StemmerPorter::PERFECTIVEGROUND = wregex(L"(»¬|»¬ÿ»|»¬ÿ»—‹|€¬|€¬ÿ»|€¬ÿ»—‹|¬ÿ»|¬ÿ»—‹)$");
-const wregex StemmerPorter::REFLEXIVE = wregex(L"(—ﬂ|—‹)$");
-const wregex StemmerPorter::ADJECTIVE = wregex(L"(≈≈|»≈|€≈|Œ≈|»Ã»|€Ã»|≈…|»…|€…|Œ…|≈Ã|»Ã|€Ã|ŒÃ|≈√Œ|Œ√Œ|≈Ã”|ŒÃ”|»’|€’|”ﬁ|ﬁﬁ|¿ﬂ|ﬂﬂ|Œﬁ|≈ﬁ)$");
-const wregex StemmerPorter::PARTICIPLE = wregex(L"(.*)(»¬ÿ|€¬ÿ|”ﬁŸ)$|([¿ﬂ])(≈Ã|ÕÕ|¬ÿ|ﬁŸ|Ÿ)$");
-const wregex StemmerPorter::VERB = wregex(L"(.*)(»À¿|€À¿|≈Õ¿|≈…“≈|”…“≈|»“≈|»À»|€À»|≈…|”…|»À|€À|»Ã|€Ã|≈Õ|»ÀŒ|€ÀŒ|≈ÕŒ|ﬂ“|”≈“|”ﬁ“|»“|€“|≈Õ€|»“‹|€“‹|»ÿ‹|”ﬁ|ﬁ)$|([¿ﬂ])(À¿|Õ¿|≈“≈|…“≈|À»|…|À|≈Ã|Õ|ÀŒ|ÕŒ|≈“|ﬁ“|Õ€|“‹|≈ÿ‹|ÕÕŒ)$");
-const wregex StemmerPorter::NOUN = wregex(L"(¿|≈¬|Œ¬|»≈|‹≈|≈|»ﬂÃ»|ﬂÃ»|¿Ã»|≈»|»»|»|»≈…|≈…|Œ…|»…|…|»ﬂÃ|ﬂÃ|»≈Ã|≈Ã|¿Ã|ŒÃ|Œ|”|¿’|»ﬂ’|ﬂ’|€|‹|»ﬁ|‹ﬁ|ﬁ|»ﬂ|‹ﬂ|ﬂ)$");
-const wregex StemmerPorter::I = wregex(L"»$");
-const wregex StemmerPorter::P = wregex(L"‹$");
-const wregex StemmerPorter::NN = wregex(L"ÕÕ$");
-const wregex StemmerPorter::DERIVATIONAL = wregex(L".*[^¿≈»Œ”€›ﬁﬂ]+[¿≈»Œ”€›ﬁﬂ].*Œ—“‹?$");
-const wregex StemmerPorter::DER = wregex(L"Œ—“‹?$");
-const wregex StemmerPorter::SUPERLATIVE = wregex(L"(≈…ÿ≈|≈…ÿ)$");
+const wregex StemmerPorter::PERFECTIVEGROUND = wregex(L"(–ò–í|–ò–í–®–ò|–ò–í–®–ò–°–¨|–´–í|–´–í–®–ò|–´–í–®–ò–°–¨|–í–®–ò|–í–®–ò–°–¨)$");
+const wregex StemmerPorter::REFLEXIVE = wregex(L"(–°–Ø|–°–¨)$");
+const wregex StemmerPorter::ADJECTIVE = wregex(L"(–ï–ï|–ò–ï|–´–ï|–û–ï|–ò–ú–ò|–´–ú–ò|–ï–ô|–ò–ô|–´–ô|–û–ô|–ï–ú|–ò–ú|–´–ú|–û–ú|–ï–ì–û|–û–ì–û|–ï–ú–£|–û–ú–£|–ò–•|–´–•|–£–Æ|–Æ–Æ|–ê–Ø|–Ø–Ø|–û–Æ|–ï–Æ)$");
+const wregex StemmerPorter::PARTICIPLE = wregex(L"(.*)(–ò–í–®|–´–í–®|–£–Æ–©)$|([–ê–Ø])(–ï–ú|–ù–ù|–í–®|–Æ–©|–©)$");
+const wregex StemmerPorter::VERB = wregex(L"(.*)(–ò–õ–ê|–´–õ–ê|–ï–ù–ê|–ï–ô–¢–ï|–£–ô–¢–ï|–ò–¢–ï|–ò–õ–ò|–´–õ–ò|–ï–ô|–£–ô|–ò–õ|–´–õ|–ò–ú|–´–ú|–ï–ù|–ò–õ–û|–´–õ–û|–ï–ù–û|–Ø–¢|–£–ï–¢|–£–Æ–¢|–ò–¢|–´–¢|–ï–ù–´|–ò–¢–¨|–´–¢–¨|–ò–®–¨|–£–Æ|–Æ)$|([–ê–Ø])(–õ–ê|–ù–ê|–ï–¢–ï|–ô–¢–ï|–õ–ò|–ô|–õ|–ï–ú|–ù|–õ–û|–ù–û|–ï–¢|–Æ–¢|–ù–´|–¢–¨|–ï–®–¨|–ù–ù–û)$");
+const wregex StemmerPorter::NOUN = wregex(L"(–ê|–ï–í|–û–í|–ò–ï|–¨–ï|–ï|–ò–Ø–ú–ò|–Ø–ú–ò|–ê–ú–ò|–ï–ò|–ò–ò|–ò|–ò–ï–ô|–ï–ô|–û–ô|–ò–ô|–ô|–ò–Ø–ú|–Ø–ú|–ò–ï–ú|–ï–ú|–ê–ú|–û–ú|–û|–£|–ê–•|–ò–Ø–•|–Ø–•|–´|–¨|–ò–Æ|–¨–Æ|–Æ|–ò–Ø|–¨–Ø|–Ø)$");
+const wregex StemmerPorter::I = wregex(L"–ò$");
+const wregex StemmerPorter::P = wregex(L"–¨$");
+const wregex StemmerPorter::NN = wregex(L"–ù–ù$");
+const wregex StemmerPorter::DERIVATIONAL = wregex(L".*[^–ê–ï–ò–û–£–´–≠–Æ–Ø]+[–ê–ï–ò–û–£–´–≠–Æ–Ø].*–û–°–¢–¨?$");
+const wregex StemmerPorter::DER = wregex(L"–û–°–¢–¨?$");
+const wregex StemmerPorter::SUPERLATIVE = wregex(L"(–ï–ô–®–ï|–ï–ô–®)$");
 
 const wregex StemmerPorter::PUNCTUATION = wregex(L"[^\\w\\s]$");
 
@@ -38,7 +38,7 @@ StemmerPorter::StemmerPorter() {
 
 wstring StemmerPorter::get(wstring s) {
 	transform(s.begin(), s.end(), s.begin(), towupper);
-	replace(s.begin(), s.end(), '®', '≈');
+	replace(s.begin(), s.end(), L'–Å', L'–ï');
 
 	size_t pos = s.find_first_of(const1, 0);
 
@@ -78,7 +78,7 @@ wstring StemmerPorter::get(wstring s) {
 			}
 		}
 
-		// Step 2: If the word ends with Ë (i), remove it. 
+		// Step 2: If the word ends with –∏ (i), remove it. 
 		rv = regex_replace(rv, I, EMPTY);
 
 		// Step 3: Search for a DERIVATIONAL ending in R2 
@@ -88,8 +88,8 @@ wstring StemmerPorter::get(wstring s) {
 			rv = regex_replace(rv, DER, EMPTY);
 		}
 
-		// Step 4: (1) Undouble Ì (n), or, (2) if the word ends with a SUPERLATIVE ending, 
-		// remove it and undouble Ì (n), or (3) if the word ends ¸ (') (soft sign) remove it. 
+		// Step 4: (1) Undouble –Ω (n), or, (2) if the word ends with a SUPERLATIVE ending, 
+		// remove it and undouble –Ω (n), or (3) if the word ends —å (') (soft sign) remove it. 
 		temp = regex_replace(rv, P, EMPTY);
 
 		if (temp.length() != rv.length()) {
